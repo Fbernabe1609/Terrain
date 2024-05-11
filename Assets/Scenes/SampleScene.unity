@@ -1160,7 +1160,7 @@ MonoBehaviour:
         m_CallState: 2
       - m_Target: {fileID: 2081682322}
         m_TargetAssemblyTypeName: TerrainEditor, Assembly-CSharp
-        m_MethodName: ShowPanel
+        m_MethodName: LoadTerrainEditorPanel
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1479,7 +1479,6 @@ GameObject:
   - component: {fileID: 963194228}
   - component: {fileID: 963194227}
   - component: {fileID: 963194226}
-  - component: {fileID: 963194229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1561,27 +1560,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1994658315}
   m_LocalEulerAnglesHint: {x: 35, y: 0, z: 0}
---- !u!95 &963194229
-Animator:
-  serializedVersion: 5
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 963194225}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 4ef6fe691eb1cbc459e9f361c2bfa74e, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &979615100
 GameObject:
   m_ObjectHideFlags: 0
@@ -1898,13 +1876,15 @@ MonoBehaviour:
   - textureIndex: 0
     initHeight: 0
   - textureIndex: 1
-    initHeight: 175
+    initHeight: 220
   - textureIndex: 2
     initHeight: 275
   - textureIndex: 3
     initHeight: 350
   - textureIndex: 4
     initHeight: 400
+  - textureIndex: 5
+    initHeight: 430
 --- !u!1 &1304364582
 GameObject:
   m_ObjectHideFlags: 0
@@ -4328,18 +4308,17 @@ MonoBehaviour:
   detail: 100
   heightCorrection: -0.05
   paint: {fileID: 1137117064}
-  numberOfTreesToPaint: 5
   minX: 0
-  maxX: 100
+  maxX: 700
   minZ: 0
-  maxZ: 100
+  maxZ: 700
   waterHeight: 160
   water: {fileID: 1357028811}
   detailInput: {fileID: 1684938733}
   waterHeightInput: {fileID: 1385853016}
   seedInput: {fileID: 469738534}
   heightCorrectionInput: {fileID: 2027720458}
-  m_Animator: {fileID: 1994658316}
+  animator: {fileID: 1994658316}
 --- !u!4 &2081682323
 Transform:
   m_ObjectHideFlags: 0

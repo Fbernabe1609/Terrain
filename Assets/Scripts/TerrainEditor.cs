@@ -11,15 +11,14 @@ public class TerrainEditor : MonoBehaviour
 {
     [SerializeField] private TerrainData terrainData;
     [SerializeField] private Terrain terrain;
-    [SerializeField] private int seed = 0;
-    [SerializeField] private int detail = 150;
-    [SerializeField] private float heightCorrection = -1;
+    [SerializeField] private int seed = 60;
+    [SerializeField] private int detail = 100;
+    [SerializeField] private float heightCorrection = -0.05f;
     [SerializeField] private TerrainPaint paint;
-    [SerializeField] private int numberOfTreesToPaint = 5;
     [SerializeField] private float minX = 0f;
-    [SerializeField] private float maxX = 1f;
+    [SerializeField] private float maxX = 700f;
     [SerializeField] private float minZ = 0f;
-    [SerializeField] private float maxZ = 1f;
+    [SerializeField] private float maxZ = 700f;
     [SerializeField] private int waterHeight = 160;
     [SerializeField] private GameObject water;
 
@@ -27,16 +26,17 @@ public class TerrainEditor : MonoBehaviour
 
     public TMPro.TMP_InputField detailInput, waterHeightInput, seedInput, heightCorrectionInput;
 
-    public Animator m_Animator;
+    public Animator animator;
+    private static readonly int Restart = Animator.StringToHash("Restart");
 
     void Start()
     {
         matrix = new float[513, 513];
-        ShowPanel();
+        LoadTerrainEditorPanel();
         UpdateTerrain();
     }
 
-    public void ShowPanel()
+    public void LoadTerrainEditorPanel()
     {
         detailInput.text = detail.ToString();
         seedInput.text = seed.ToString();
@@ -56,10 +56,10 @@ public class TerrainEditor : MonoBehaviour
         }
         catch (FormatException e)
         {
-            Debug.Log("Error: " + e.Message);
+            Debug.Log("Debug: " + e.Message);
         }
 
-        m_Animator.SetTrigger("Restart");
+        animator.SetTrigger(Restart);
 
         HeightGenerator();
 
@@ -70,42 +70,23 @@ public class TerrainEditor : MonoBehaviour
         PaintTrees();
     }
 
-    // private void PaintTrees()
-    // {
-    //     for (int i = 0; i < NumberTrees; i++)
-    //     {
-    //         TreeInstance tree = new TreeInstance();
-    //         tree.prototypeIndex = 0;
-    //
-    //         //tree = terrainData.treeInstances[i]=tree;
-    //
-    //         Vector3 position = new Vector3(UnityEngine.Random.Range(minX, maxX), 0f,
-    //             UnityEngine.Random.Range(minZ, maxZ));
-    //         tree.position = position;
-    //
-    //         tree.position = new Vector3(1/ 100, 0, 1 / 100);
-    //         tree.prototypeIndex = 0;
-    //         tree.widthScale = 1f;
-    //         tree.heightScale = 1f;
-    //         tree.color = Color.white;
-    //         tree.lightmapColor = Color.white;
-    //
-    //         terrain.AddTreeInstance(tree);
-    //     }
-    // }
-    
     private void PaintTrees()
     {
-        for (int i = 0; i < numberOfTreesToPaint; i++)
+        for (int i = 0; i < terrainData.treePrototypes.Length; i++)
         {
             TreeInstance tree = new TreeInstance();
-            tree = terrainData.treeInstances[i];
-            Vector3 position = new Vector3(Random.Range(minX,maxX), 0, Random.Range(minZ,maxZ));
+            tree.prototypeIndex = i;
+
+            Vector3 position = new Vector3(Random.Range(minX, maxX), 0f, Random.Range(minZ, maxZ));
+
             tree.position = position;
+            tree.widthScale = 5f;
+            tree.heightScale = 5f;
+
             terrain.AddTreeInstance(tree);
         }
     }
-    
+
     private void HeightGenerator()
     {
         water.transform.position = new Vector3(water.transform.position.x, waterHeight, water.transform.position.z);
