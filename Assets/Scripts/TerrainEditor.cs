@@ -50,16 +50,14 @@ public class TerrainEditor : MonoBehaviour
         {
             detail = Int32.Parse(detailInput.text);
             seed = Int32.Parse(seedInput.text);
-            CultureInfo culture = CultureInfo.CreateSpecificCulture("fr-FR");
+            CultureInfo culture = CultureInfo.CreateSpecificCulture("en-En");
             heightCorrection = (float)Double.Parse(heightCorrectionInput.text, culture);
             waterHeight = Int32.Parse(waterHeightInput.text);
         }
         catch (FormatException e)
         {
-            Debug.Log("Debug: " + e.Message);
+            Debug.Log("Problem: " + e.Message);
         }
-
-        animator.SetTrigger(Restart);
 
         HeightGenerator();
 
@@ -68,6 +66,8 @@ public class TerrainEditor : MonoBehaviour
         paint.TerrainPainting();
 
         PaintTrees();
+        
+        animator.SetTrigger(Restart);
     }
 
     private void PaintTrees()

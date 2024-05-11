@@ -30,7 +30,7 @@ public class TerrainPaint : MonoBehaviour
                     {
                         paint[i] = 1;
                     }
-                    else if (localHeight >= heightTexture[heightTexture.Length-1].initHeight)
+                    else if (localHeight >= heightTexture[^1].initHeight)
                     {
                         paint[heightTexture.Length-1] = 1;
                     }
